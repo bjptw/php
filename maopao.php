@@ -73,6 +73,8 @@ function insertSort($arr){
 function quickSort($arr){
 	//获取数组长度
 	$len = count($arr);
+	//静态变量，获取次数
+	static $num = 0;
 	if($len <= 1)
 		return $arr;
 	//假设第一个为基准数
@@ -82,6 +84,7 @@ function quickSort($arr){
 	$right_array = array();
 	//循环将小于基准数的放左边，否则右边
 	for ($i=1; $i < $len; $i++) { 
+		$num++;
 		if($base_num > $arr[$i])
 			$left_array[] = $arr[$i];
 		else
@@ -91,11 +94,14 @@ function quickSort($arr){
 	$left_array = quickSort($left_array);
 	$right_array = quickSort($right_array);
 	//合并
-	return array_merge($left_array,array($base_num),$right_array);
+	return array_merge($left_array,array($base_num),$right_array,array("num"=>$num));
 }
-
+//次数55
 // $attr = bubbleSort($arr);
+//次数55
 // $attr = selectSort($arr);
-// $attr = insertSort($arr);
-$attr = quickSort($arr);
+//次数29
+$attr = insertSort($arr);
+//次数35
+// $attr = quickSort($arr);
 print_r($attr);
